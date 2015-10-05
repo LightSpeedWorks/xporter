@@ -3,26 +3,26 @@
   "version": "0.0.0",
   "description": "xporter - transporter",
   "main": "index.js",
+  "private": true,
+  "dependencies": {
+  },
+  "keywords": [
+    "xporter",
+    "transporter",
+    "tcp",
+    "net"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/LightSpeedWorks/xporter",
+  "bugs": {
+    "url": "https://github.com/LightSpeedWorks/xporter/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/LightSpeedWorks/xporter.git"
   },
-  "keywords": [
-    "tcp",
-    "net",
-    "transporter"
-  ],
-  "author": {
-    "name": "LightSpeedC (Kazuaki Nishizawa)",
-    "email": "Kazuaki.Nishizawa@gmail.com",
-    "url": "http://www.facebook.com/Kazuaki.Nishizawa"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/LightSpeedWorks/xporter/issues"
-  },
-  "homepage": "https://github.com/LightSpeedWorks/xporter"
+  "author": "LightSpeedC",
+  "license": "MIT"
 }
