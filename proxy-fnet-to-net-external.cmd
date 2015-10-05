@@ -1,0 +1,3 @@
+@set HERE=%~dp0
+%HERE%node %HERE%fnet-net %XPORTER_PROXY_FOLDER% 8080 %XPORTER_PROXY_EXTERNAL%
+@pause
