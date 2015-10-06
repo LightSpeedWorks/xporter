@@ -5,6 +5,6 @@
 )
 @pause
 @echo %XPORTER_PROXY_FOLDER%
-node fnet-net %XPORTER_PROXY_FOLDER% 8080 %XPORTER_PROXY_EXTERNAL%
+node net-fnet %XPORTER_PROXY_FOLDER% 9998 proxy 8080
 @pause
 @popd
