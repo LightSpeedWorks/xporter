@@ -50,7 +50,11 @@
       if (exists) console.log('deleting... %s   ', name);
       //console.log('deleting... %s   ', name,
       //   exists ? '' : '*** DOES NOT EXISTS ALREADY ***');
-      rmdirRecursive.sync(dir);
+      try {
+        rmdirRecursive.sync(dir);
+      } catch (err) {
+        console.log(err.stack || '' + err);
+      }
     }
     if (reason !== 'exit') {
       if (waitFlag) {
@@ -229,7 +233,7 @@
       }
       //console.log('close ' + soc.$socDir);
 
-    })();
+    });
 
   } // FnetSocket_connect
 
@@ -371,7 +375,7 @@
         }
       }
 
-    })();
+    });
   }
 
   //----------------------------------------------------------------------
@@ -408,7 +412,7 @@
         yield cofs.writeFile(file + '.tmp', '');
         yield cofs.rename(file + '.tmp', file + '.txt');
       }
-    })();
+    });
   }
 
   //######################################################################
@@ -507,7 +511,7 @@
         yield rmdirRecursive(svrDir);
       }
 
-    })();
+    });
 
     return this; // server
 
