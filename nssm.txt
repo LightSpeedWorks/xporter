@@ -1,0 +1,20 @@
+nssm 説明
+=========
+
+NSSM - the Non-Sucking Service Manager
+--------------------------------------
+
+http://nssm.cc/
+
+	nssm.exe	nssm実行イメージ (32bit)
+	nssm64.exe	nssm実行イメージ (64bit)
+
+	nssm.txt	このファイル
+	nssm-*.cmd	コマンド群 (西澤作成)
+
+	nssm-service-install-user-admin.cmd	adminでサービス登録＆サービス開始
+	nssm-service-install.cmd       		サービス登録＆サービス開始
+	nssm-service-remove.cmd        		サービス停止＆サービス削除
+	nssm-service-start.cmd			サービス開始
+	nssm-service-stop.cmd			サービス停止
+	nssm-set-svc-app-name.cmd		サービス名とアプリのPATHを指定
