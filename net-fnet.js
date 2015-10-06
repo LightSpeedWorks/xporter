@@ -6,8 +6,7 @@ var PROXY_PORT = process.argv[5] || 80;    // proxy server port
 require('./redirect-log')(CONFIG_DIR, 'client');
 var net  = require('net');
 var fnet = require('./fnet');
-var co   = require('co');
-var chan = require('co-chan');
+var aa   = require('aa');
 
 if (!PROXY_HOST) return console.log('proxy server not found');
 
@@ -21,14 +20,14 @@ process.title = 'proxy ' + HTTP_PORT +
 fnet.setConfig({dir: CONFIG_DIR});
 
 var server = net.createServer(function onCliConn(cliSoc) {
-  var cliChan = chan();
-  var svrChan = chan();
+  var cliChan = aa();
+  var svrChan = aa();
   var svrSoc = fnet.connect(PROXY_PORT, PROXY_HOST);
   svrChan.stream(svrSoc); // svrChan <- svrSoc
   cliChan.stream(cliSoc); // cliChan <- cliSoc
 
   // start thread for svrChan <- svrSoc
-  co(function*(){
+  aa(function*(){
     try {
       while (!svrChan.done()) {
         var buf = yield svrChan;
@@ -44,7 +43,7 @@ var server = net.createServer(function onCliConn(cliSoc) {
   })();
 
   // start thread for cliChan <- cliSoc
-  co(function*(){
+  aa(function*(){
     try {
       while (!cliChan.done()) {
         var buf = yield cliChan;

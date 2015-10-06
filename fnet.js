@@ -9,9 +9,8 @@
   var path = require('path');
   var events = require('events');
 
-  var co = require('co');
+  var aa = require('aa');
   var cofs = require('co-fs');
-  var chan = require('co-chan');
   var mkdirParents = require('mkdir-parents');
   var rmdirRecursive = require('rmdir-recursive');
 
@@ -110,7 +109,7 @@
     soc.$socDir = cliDirName(soc.$no);
     soc.$reading = false;
     soc.$readBuffs = [];
-    soc.$writeChan = chan();
+    soc.$writeChan = aa();
     soc.$writeSeq = 0;
     soc.$isClosed = false;
     //console.log('open  ' + soc.$socDir);
@@ -134,7 +133,7 @@
     soc.$remoteDir = svrDirName(host, port);
 
     // new thread
-    co(function*(){
+    aa(function*(){
       var cliDir = path.resolve(config.dir, soc.$socDir);
       var remoteDir = path.resolve(config.dir, soc.$remoteDir);
 
@@ -142,7 +141,7 @@
         yield rmdirRecursive(cliDir);
         yield mkdirParents(cliDir);
 
-        var cliDirWatchChan = chan();
+        var cliDirWatchChan = aa();
         var cliDirWatch = fs.watch(cliDir, cliDirWatchChan);
         dirWatches[cliDir] = cliDirWatch; // ####
         console.log('creating... %s', getTermName(cliDir)); // ####
@@ -295,13 +294,13 @@
     var soc = this;
 
     // new thread
-    co(function*(){
+    aa(function*(){
       var cliDir = path.resolve(config.dir, soc.$socDir);
 
       try {
         yield mkdirParents(cliDir);
 
-        var cliDirWatchChan = chan();
+        var cliDirWatchChan = aa();
         var cliDirWatch = fs.watch(cliDir, cliDirWatchChan);
         dirWatches[cliDir] = cliDirWatch; // ####
         console.log('creating... %s', getTermName(cliDir)); // ####
@@ -384,7 +383,7 @@
     dirWatches[path.resolve(config.dir, remotePath)] = null; // ####
     console.log('connect ... %s', remotePath); // ####
 
-    co(function*() {
+    aa(function*() {
       try {
         while (!soc.$writeChan.done()) {
           var buff = yield soc.$writeChan;
@@ -437,13 +436,13 @@
       server.on('listening', cb);
 
     // new thread
-    co(function*(){
+    aa(function*(){
       try {
         port = String(port);
         var svrDir = path.resolve(config.dir, svrDirName(hostname, port));
         server.$socDirs.push([port, svrDir]);
 
-        var svrDirWatchChan = chan();
+        var svrDirWatchChan = aa();
 
         yield rmdirRecursive(svrDir);
         yield mkdirParents(svrDir);

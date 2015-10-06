@@ -5,6 +5,12 @@
   "main": "index.js",
   "private": true,
   "dependencies": {
+    "aa": "^0.1.14",
+    "co-fs": "^1.2.0",
+    "date-time-string": "0.0.9",
+    "mkdir-parents": "0.0.2",
+    "promise-thunk": "^0.1.1",
+    "rmdir-recursive": "0.0.1"
   },
   "keywords": [
     "xporter",
