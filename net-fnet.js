@@ -10,7 +10,10 @@ var aa   = require('aa');
 
 if (!PROXY_HOST) return console.log('proxy server not found');
 
-// title ƒ^ƒCƒgƒ‹
+console.log('node', process.version, process.platform, process.arch);
+Object.keys(process.env).filter(x=>x.indexOf('PROXY') >= 0).forEach(x=>console.log(x, process.env[x]));
+
+// title ã‚¿ã‚¤ãƒˆãƒ«
 if (process.title.indexOf('; ') > 0)
   process.title = process.title.slice(process.title.indexOf('; ') + 2);
 process.title = 'proxy ' + HTTP_PORT +
