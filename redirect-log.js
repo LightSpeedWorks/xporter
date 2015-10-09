@@ -20,17 +20,22 @@ function redirectLog(dir, id) {
   //writer.writeln('writeln');
   //writer.end();
 
-  function sprintf(format, etc) {
-    var arg = arguments;
+  var form = {s: String, d: Number, j: JSON.stringify};
+
+  function sprintf(format) {
     var i = 1;
-    return format.replace(/%((%)|s|d|j)/g, function (m) { return m[2] || arg[i++] })
+    var str = format.replace(/%((%)|s|d|j)/g,
+      (match, p1, p2) => p2 || (i < arguments.length ? form[p1](arguments[i++]) : match));
+    while (i < arguments.length)
+      str += ' ' + arguments[i++];
+    return str;
   }
 
   console.log = function log() {
-    orgConsoleLog.apply(console, arguments);
+    arguments[0] = new Date().toTimeString().slice(0, 9) + arguments[0];
     var args = sprintf.apply(null, arguments);
-    var msg = new Date().toTimeString().slice(0, 9) + args;
-    writer.writeln(msg);
+    orgConsoleLog.call(console, '%s', args);
+    writer.writeln(args);
   }
 
   writer.writeln('-------- start');
