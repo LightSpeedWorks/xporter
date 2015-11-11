@@ -1,3 +1,4 @@
+@node -p '\x1b[42m' & cls
 @pushd %~dp0
 @if "%XPORTER_PROXY_FOLDER%" == "" (
 	set XPORTER_PROXY_FOLDER=work
