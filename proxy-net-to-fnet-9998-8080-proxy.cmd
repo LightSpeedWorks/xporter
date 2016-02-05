@@ -7,4 +7,5 @@
 @echo %XPORTER_PROXY_FOLDER%
 @node net-fnet %XPORTER_PROXY_FOLDER% 9998 proxy 8080
 @popd
+@node -p '\x1b[41m'
 @pause
